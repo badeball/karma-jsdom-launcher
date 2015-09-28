@@ -1,0 +1,20 @@
+{
+  "name": "karma-jsdom-launcher",
+  "version": "0.0.1",
+  "description": "A Karma plugin. Launcher for jsdom.",
+  "main": "index.js",
+  "author": "Jonas Amundsen <jonasba@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/badeball/karma-jsdom-launcher.git"
+  },
+  "keywords": [
+    "karma-plugin",
+    "karma-launcher",
+    "jsdom"
+  ],
+  "dependencies": {
+    "jsdom": "^6.5.1"
+  },
+  "license": "MIT"
+}
