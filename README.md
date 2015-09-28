@@ -10,7 +10,7 @@ The easiest way is to keep `karma-jsdom-launcher` as a devDependency in your `pa
 {
   "devDependencies": {
     "karma": "~0.13.10",
-    "karma-jsdom-launcher": "~1.0.0"
+    "karma-jsdom-launcher": "~2.0.0"
   }
 }
 ```
