@@ -2,6 +2,8 @@ var jsdom = require("jsdom");
 
 var jsdomBrowser = function (baseBrowserDecorator) {
   baseBrowserDecorator(this);
+  
+  this.name = "jsdom";
 
   this._start = function (url) {
     jsdom.env({
