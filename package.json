@@ -14,7 +14,7 @@
     "jsdom"
   ],
   "dependencies": {
-    "jsdom": "^6.5.1"
+    "jsdom": "^7.0.0"
   },
   "license": "MIT"
 }
