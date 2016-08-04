@@ -35,6 +35,42 @@ You can pass list of browsers as a CLI argument too:
 karma start --browsers jsdom
 ```
 
+## FAQ
+
+### I am using Gulp and the test suite is not exiting
+
+This occurs due to lingering event handlers and it is currently an unsolved
+issue. Meanwhile you have to explicitly exit the process yourself. This can be
+done by not passing a callback to Karma.Server or by invoking process.exit(),
+as shown below.
+
+```javascript
+var gulp = require('gulp');
+var Server = require('karma').Server;
+
+gulp.task('test', function () {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }).start();
+});
+```
+
+```javascript
+var gulp = require('gulp');
+var Server = require('karma').Server;
+
+gulp.task('test', function (done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, function (exitCode) {
+    done();
+    process.exit(exitCode);
+  }).start();
+});
+```
+
 ----
 
 For more information on Karma see the [homepage].
