@@ -1,7 +1,12 @@
 language: node_js
 node_js:
   - "node"
+env:
+  - JSDOM_VERSION=6
+  - JSDOM_VERSION=7
+  - JSDOM_VERSION=8
+  - JSDOM_VERSION=9
 script:
-  - npm install jsdom@^9.0.0
+  - npm install jsdom@$JSDOM_VERSION
   - ln -s ../ node_modules/karma-jsom-launcher
   - karma start test/karma.conf.js
