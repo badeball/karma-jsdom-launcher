@@ -13,7 +13,7 @@
     "karma-launcher",
     "jsdom"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "jsdom": "^9.0.0"
   },
   "license": "MIT",

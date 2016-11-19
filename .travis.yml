@@ -2,5 +2,6 @@ language: node_js
 node_js:
   - "node"
 script:
+  - npm install jsdom@^9.0.0
   - ln -s ../ node_modules/karma-jsom-launcher
   - karma start test/karma.conf.js
