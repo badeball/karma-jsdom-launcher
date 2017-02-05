@@ -4,21 +4,17 @@
 
 ## Installation
 
-The easiest way is to keep `karma-jsdom-launcher` as a devDependency in your `package.json`.
-
-```json
-{
-  "devDependencies": {
-    "karma": "~0.13.10",
-    "karma-jsdom-launcher": "~2.0.0"
-  }
-}
-```
-
-You can simple do it by:
 ```bash
 npm install karma-jsdom-launcher --save-dev
 ```
+
+*NOTE:* karma and jsdom are peerDependencies of this module. If you haven't install them, run
+
+```bash
+npm install karma-jsdom-launcher jsdom karma --save-dev
+```
+
+to install all your dependencies.
 
 ## Configuration
 ```js
