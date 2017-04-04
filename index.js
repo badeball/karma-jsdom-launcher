@@ -12,6 +12,7 @@ var jsdomBrowser = function (baseBrowserDecorator) {
         FetchExternalResources: ["script", "iframe"],
         ProcessExternalResources: ["script"]
       },
+      virtualConsole: jsdom.createVirtualConsole().sendTo(console),
       created: function (error, window) {
         // Do nothing.
       }
