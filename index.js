@@ -6,16 +6,23 @@ var jsdomBrowser = function (baseBrowserDecorator) {
   this.name = "jsdom";
 
   this._start = function (url) {
-    jsdom.env({
-      url: url,
-      features : {
-        FetchExternalResources: ["script", "iframe"],
-        ProcessExternalResources: ["script"]
-      },
-      created: function (error, window) {
-        // Do nothing.
-      }
-    });
+    if (jsdom.JSDOM) { // Indicate jsdom >= 10.0.0 and a new API
+      jsdom.JSDOM.fromURL(url, {
+        resources: "usable",
+        runScripts: "dangerously"
+      });
+    } else {
+      jsdom.env({
+        url: url,
+        features : {
+          FetchExternalResources: ["script", "iframe"],
+          ProcessExternalResources: ["script"]
+        },
+        created: function (error, window) {
+          // Do nothing.
+        }
+      });
+    }
   };
 };
 
