@@ -10,4 +10,4 @@ env:
 script:
   - npm install jsdom@$JSDOM_VERSION
   - ln -s ../ node_modules/karma-jsom-launcher
-  - karma start test/karma.conf.js
+  - npm test
