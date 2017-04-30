@@ -1,5 +1,15 @@
 var jsdom = require("jsdom");
 
+function assign (destination, source) {
+  for (var key in source) {
+    if (source.hasOwnProperty(key)) {
+      destination[key] = source[key];
+    }
+  }
+
+  return destination;
+}
+
 var jsdomBrowser = function (baseBrowserDecorator, config) {
   baseBrowserDecorator(this);
   
@@ -13,17 +23,23 @@ var jsdomBrowser = function (baseBrowserDecorator, config) {
         virtualConsole = new jsdom.VirtualConsole().sendTo(console);
       }
 
-      jsdom.JSDOM.fromURL(url, {
+      var jsdomOptions = {
         resources: "usable",
         runScripts: "dangerously",
         virtualConsole: virtualConsole
-      });
+      };
+
+      if (config.jsdom) {
+        jsdomOptions = assign(jsdomOptions, config.jsdom);
+      }
+
+      jsdom.JSDOM.fromURL(url, jsdomOptions);
     } else {
       if (config.redirectConsole) {
         virtualConsole = jsdom.createVirtualConsole().sendTo(console);
       }
 
-      jsdom.env({
+      var jsdomOptions = {
         url: url,
         virtualConsole: virtualConsole,
         features : {
@@ -33,7 +49,13 @@ var jsdomBrowser = function (baseBrowserDecorator, config) {
         created: function (error, window) {
           // Do nothing.
         }
-      });
+      }
+
+      if (config.jsdom) {
+        jsdomOptions = assign(jsdomOptions, config.jsdom);
+      }
+
+      jsdom.env(jsdomOptions);
     }
   };
 };
