@@ -8,6 +8,8 @@ let { randomBytes } = require("crypto");
 
 let { exec, spawn } = require("./child_process");
 
+let { Writable } = require("stream");
+
 function generateRandomFilePath () {
   return join(
     tmpdir(),
@@ -55,7 +57,26 @@ function waitToExit (process) {
   });
 }
 
+class WriteableBuffer extends Writable {
+  constructor (options) {
+    super(options);
+
+    this.chunks = [];
+  }
+
+  _write (chunk, encoding, callback) {
+    this.chunks.push(chunk);
+
+    callback();
+  }
+
+  getContents () {
+    return Buffer.concat(this.chunks);
+  }
+}
+
 module.exports = {
   createKarmaTest,
   waitToExit,
+  WriteableBuffer
 };
