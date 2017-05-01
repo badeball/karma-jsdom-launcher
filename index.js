@@ -19,8 +19,7 @@ var jsdomBrowser = function (baseBrowserDecorator, config) {
     if (jsdom.JSDOM) { // Indicate jsdom >= 10.0.0 and a new API
       var jsdomOptions = {
         resources: "usable",
-        runScripts: "dangerously",
-        virtualConsole: virtualConsole
+        runScripts: "dangerously"
       };
 
       if (config.jsdom) {
