@@ -22,7 +22,7 @@ var jsdomBrowser = function (baseBrowserDecorator, config) {
         runScripts: "dangerously"
       };
 
-      if (config.jsdom) {
+      if (config && config.jsdom) {
         jsdomOptions = assign(jsdomOptions, config.jsdom);
       }
 
@@ -39,7 +39,7 @@ var jsdomBrowser = function (baseBrowserDecorator, config) {
         }
       }
 
-      if (config.jsdom) {
+      if (config && config.jsdom) {
         jsdomOptions = assign(jsdomOptions, config.jsdom);
       }
 
