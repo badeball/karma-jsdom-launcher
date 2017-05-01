@@ -31,6 +31,24 @@ You can pass list of browsers as a CLI argument too:
 karma start --browsers jsdom
 ```
 
+You can pass options directly to jsdom as shown below. See jsdom's own
+documentation for all supported options.
+
+```js
+// karma.conf.js
+module.exports = function(config) {
+  config.set({
+    browsers: ['jsdom'],
+
+    jsdomLauncher: {
+      jsdom: {
+        userAgent: "foobar"
+      }
+    }
+  });
+};
+```
+
 ## FAQ
 
 ### I am using Gulp and the test suite is not exiting
