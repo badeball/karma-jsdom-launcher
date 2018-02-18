@@ -8,6 +8,8 @@ let { randomBytes } = require("crypto");
 
 let { exec, spawn } = require("./child_process");
 
+let { COPY_KARMA } = process.env;
+
 function generateRandomFilePath () {
   return join(
     tmpdir(),
@@ -40,7 +42,9 @@ async function createKarmaTest (launcherOptions, testFunction) {
 
   var karmaBinPath = join(npmBinDirectory, "karma");
 
-  return spawn(karmaBinPath, ["start", tmpConfigFile]);
+  return spawn(karmaBinPath, ["start", tmpConfigFile], {
+    stdio: COPY_KARMA === "1" ? "inherit" : "pipe"
+  });
 }
 
 function waitToExit (process) {
