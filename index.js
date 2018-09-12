@@ -12,7 +12,7 @@ function assign (destination, source) {
 
 var jsdomBrowser = function (baseBrowserDecorator, config) {
   baseBrowserDecorator(this);
-  
+
   this.name = "jsdom";
 
   this._start = function (url) {
@@ -21,6 +21,13 @@ var jsdomBrowser = function (baseBrowserDecorator, config) {
         resources: "usable",
         runScripts: "dangerously"
       };
+
+      // jsdom 12.0.0 added the ResourceLoader
+      if (jsdom.ResourceLoader && config && config.jsdom && config.jsdom.userAgent) {
+        jsdomOptions.resources = new jsdom.ResourceLoader({
+          userAgent: config.jsdom.userAgent,
+        });
+      }
 
       if (config && config.jsdom) {
         jsdomOptions = assign(jsdomOptions, config.jsdom);
