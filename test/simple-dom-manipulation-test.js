@@ -1,7 +1,7 @@
 let { createKarmaTest, waitToExit } = require("./test-helper");
 
 it("should allow simple DOM manipulations", async () => {
-  let process = await createKarmaTest({}, () => {
+  await createKarmaTest({}, () => {
     let divEl = document.createElement("div");
 
     divEl.appendChild(document.createTextNode("foo bar"));
@@ -10,6 +10,4 @@ it("should allow simple DOM manipulations", async () => {
       throw new Error("Expected textContent to equal 'foo bar'");
     }
   });
-
-  await waitToExit(process);
 });

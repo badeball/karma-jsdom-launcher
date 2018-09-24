@@ -8,7 +8,7 @@ let { randomBytes } = require("crypto");
 
 let { exec, spawn } = require("./child_process");
 
-let { COPY_KARMA } = process.env;
+let { Server } = require("karma");
 
 function generateRandomFilePath () {
   return join(
@@ -17,8 +17,7 @@ function generateRandomFilePath () {
 }
 
 async function createKarmaTest (launcherOptions, testFunction) {
-  let tmpTestFile = generateRandomFilePath(),
-      tmpConfigFile = generateRandomFilePath();
+  let tmpTestFile = generateRandomFilePath();
 
   let config = {
     files:         [tmpTestFile],
@@ -32,34 +31,17 @@ async function createKarmaTest (launcherOptions, testFunction) {
     it("dummy description", ${testFunction.toString()});
   `);
 
-  await writeFile(tmpConfigFile, `
-    module.exports = function(config) {
-      config.set(${JSON.stringify(config)});
-    };
-  `);
-
-  var npmBinDirectory = (await exec("npm bin")).stdout.toString().replace(/\n$/, "");
-
-  var karmaBinPath = join(npmBinDirectory, "karma");
-
-  return spawn(karmaBinPath, ["start", tmpConfigFile], {
-    stdio: COPY_KARMA === "1" ? "inherit" : "pipe"
-  });
-}
-
-function waitToExit (process) {
-  return new Promise(function (resolve, reject) {
-    process.on("exit", function (code) {
-      if (code === 0) {
+  return new Promise((resolve, reject) => {
+    new Server(config, function(exitCode) {
+      if (exitCode === 0) {
         resolve();
       } else {
         reject(new Error("The Karma test errored. Run with COPY_KARMA=1 to see Karma's output."));
       }
-    });
-  });
+    }).start();
+  })
 }
 
 module.exports = {
-  createKarmaTest,
-  waitToExit,
+  createKarmaTest
 };

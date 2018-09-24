@@ -15,12 +15,10 @@ describe("with jsdom: { … }", function () {
   let it = jsdomMajorVersion > 7 ? global.it : global.it.skip;
 
   it("should pass options to jsdom", async function () {
-    let process = await createKarmaTest({ jsdom: { userAgent: "foobar" } }, function () {
+    await createKarmaTest({ jsdom: { userAgent: "foobar" } }, function () {
       if (navigator.userAgent !== "foobar") {
         throw new Error("Expected userAgent to equal 'foobar'");
       }
     });
-
-    await waitToExit(process);
   });
 });
