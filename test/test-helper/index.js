@@ -14,6 +14,18 @@ let { interceptStdout } = require("./intercept_stdout");
 
 let { Server } = require("karma");
 
+// As per 3.0.0 [1], Karma will attempt to clear the console of any content.
+// With jsdom and node, this translates into ^[1];1H^[0J and your terminal is
+// cleared. This isn't desirable and thus we remove the method.
+//
+// [1] https://github.com/karma-runner/karma/blob/v3.0.0/client/karma.js#L223
+console.clear = null;
+
+if (console.clear) {
+  console.error("Unable to remove console.clear(), exiting…");
+  process.exit(1);
+}
+
 function generateRandomFilePath () {
   return join(
     tmpdir(),
