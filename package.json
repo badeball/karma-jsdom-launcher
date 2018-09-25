@@ -14,6 +14,7 @@
     "jsdom"
   ],
   "scripts": {
+    "clean-install": "rm -rf node_modules/ && npm install && npm install --no-save karma@2 jsdom@11 && ln -s ../ node_modules/karma-jsdom-launcher",
     "test": "mocha --timeout 10000 --slow 5000"
   },
   "peerDependencies": {
