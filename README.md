@@ -51,12 +51,28 @@ module.exports = function(config) {
 
 ## FAQ
 
+### I want to use jsdom v12
+
+Version 12 of jsdom is currently causing some [issues in CI][issue-24].
+Updating has been held of until it can be determined to not be an issue for the
+launcher itself.  Until then, users can install the launcher from a branch
+named `jsdom-12`.
+
+This branch will will be kept up-to-date with the release line, with the
+exception of supporting v12. The branch will continue to exist as long as it's
+not unpractical, but might contain as post-install deprecation warning in the
+future.
+
+```
+npm install git://github.com/badeball/karma-jsdom-launcher.git#jsdom-12
+```
+
 ### I am using Gulp and the test suite is not exiting
 
-This occurs due to lingering event handlers and it is currently an unsolved
-issue. Meanwhile you have to explicitly exit the process yourself. This can be
-done by not passing a callback to Karma.Server or by invoking process.exit(),
-as shown below.
+This occurs due to lingering event handlers and it is currently an [unsolved
+issue][issue-4]. Meanwhile you have to explicitly exit the process yourself.
+This can be done by not passing a callback to Karma.Server or by invoking
+process.exit(), as shown below.
 
 ```javascript
 var gulp = require('gulp');
@@ -92,3 +108,5 @@ For more information on Karma see the [homepage].
 
 [homepage]: http://karma-runner.github.com
 [jsdom]: https://github.com/tmpvar/jsdom
+[issue-4]: https://github.com/badeball/karma-jsdom-launcher/issues/4
+[issue-24]: https://github.com/badeball/karma-jsdom-launcher/issues/24
