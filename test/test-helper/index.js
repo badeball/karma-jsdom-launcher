@@ -28,6 +28,10 @@ if (console.clear) {
   process.exit(1);
 }
 
+afterEach((done) => {
+  setTimeout(done, jsdomMajorVersion >= 12 && jsdomMajorVersion <= 13 ? 2000 : 0);
+});
+
 function generateRandomFilePath () {
   return join(
     tmpdir(),
