@@ -14,6 +14,8 @@ let { interceptStdout } = require("./intercept_stdout");
 
 let { Server } = require("karma");
 
+let { jsdomMajorVersion } = require("./jsdom-version");
+
 // As per 3.0.0 [1], Karma will attempt to clear the console of any content.
 // With jsdom and node, this translates into ^[1];1H^[0J and your terminal is
 // cleared. This isn't desirable and thus we remove the method.
@@ -61,5 +63,6 @@ async function createKarmaTest (launcherOptions, testFunction) {
 }
 
 module.exports = {
-  createKarmaTest
+  createKarmaTest,
+  jsdomMajorVersion
 };

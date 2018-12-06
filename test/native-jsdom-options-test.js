@@ -1,6 +1,4 @@
-let { createKarmaTest, waitToExit, WriteableBuffer } = require("./test-helper");
-
-let { execSync } = require("child_process");
+let { createKarmaTest, waitToExit, WriteableBuffer, jsdomMajorVersion } = require("./test-helper");
 
 let { ResourceLoader } = require("jsdom");
 
@@ -12,8 +10,6 @@ describe("with jsdom: { … }", function () {
    * there was an easier to test for this condition.
    *
    */
-  let jsdomMajorVersion = parseInt(execSync("npm ls | grep -o -P '(?<=jsdom@)[0-9]+'"), 10);
-
   let it = jsdomMajorVersion > 7 ? global.it : global.it.skip;
 
   it("should pass options to jsdom", async function () {
