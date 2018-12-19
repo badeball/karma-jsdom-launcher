@@ -36,13 +36,17 @@ documentation for all supported options.
 
 ```js
 // karma.conf.js
+const jsdom = require("jsdom");
+
 module.exports = function(config) {
   config.set({
     browsers: ['jsdom'],
 
     jsdomLauncher: {
       jsdom: {
-        userAgent: "foobar"
+        resources: new jsdom.ResourceLoader({
+          userAgent: "foobar",
+        })
       }
     }
   });
