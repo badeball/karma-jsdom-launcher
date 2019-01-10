@@ -46,6 +46,13 @@ var jsdomBrowser = function (baseBrowserDecorator, config) {
       jsdom.env(jsdomOptions);
     }
   };
+
+  var self = this;
+
+  this.on("kill", function (done) {
+    self.emit("done");
+    process.nextTick(done);
+  });
 };
 
 jsdomBrowser.$inject = ["baseBrowserDecorator", "config.jsdomLauncher"];
