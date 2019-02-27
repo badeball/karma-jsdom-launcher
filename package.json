@@ -14,12 +14,12 @@
     "jsdom"
   ],
   "scripts": {
-    "clean-install": "rm -rf node_modules/ && npm install && npm install --no-save karma@3 jsdom@13 && ln -s ../ node_modules/karma-jsdom-launcher",
+    "clean-install": "rm -rf node_modules/ && npm install && npm install --no-save karma@4 jsdom@13 && ln -s ../ node_modules/karma-jsdom-launcher",
     "test": "mocha --timeout 10000 --slow 5000"
   },
   "peerDependencies": {
     "jsdom": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0",
-    "karma": "^1.4.0 || ^2.0.0 || ^3.0.0"
+    "karma": "^1.4.0 || ^2.0.0 || ^3.0.0 || ^4.0.0"
   },
   "license": "MIT",
   "devDependencies": {
