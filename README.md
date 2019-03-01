@@ -89,6 +89,23 @@ gulp.task('test', function (done) {
 });
 ```
 
+### I am using Angular CLI and the test suite hangs indefinitely
+
+You might experience a [known issue][issue-27] where Karma attempts to perform
+a synchronous request, resulting in a deadlock. Disable use of source-maps in
+your tests, as shown below.
+
+```
+// angular.json
+
+{
+  ...
+        "test": {
+          "options": {
+            "sourceMap": false
+
+```
+
 ----
 
 For more information on Karma see the [homepage].
@@ -97,3 +114,4 @@ For more information on Karma see the [homepage].
 [homepage]: http://karma-runner.github.com
 [jsdom]: https://github.com/tmpvar/jsdom
 [issue-4]: https://github.com/badeball/karma-jsdom-launcher/issues/4
+[issue-27]: https://github.com/badeball/karma-jsdom-launcher/issues/27
