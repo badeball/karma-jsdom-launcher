@@ -12,10 +12,14 @@ function assign (destination, source) {
 
 var jsdomBrowser = function (baseBrowserDecorator, config) {
   baseBrowserDecorator(this);
+
+  var self = this;
   
   this.name = "jsdom";
 
   this._start = function (url) {
+    self.window = null;
+
     if (jsdom.JSDOM) { // Indicate jsdom >= 10.0.0 and a new API
       var jsdomOptions = {
         resources: "usable",
@@ -26,7 +30,9 @@ var jsdomBrowser = function (baseBrowserDecorator, config) {
         jsdomOptions = assign(jsdomOptions, config.jsdom);
       }
 
-      jsdom.JSDOM.fromURL(url, jsdomOptions);
+      jsdom.JSDOM.fromURL(url, jsdomOptions).then(function (dom) {
+        self.window = dom.window;
+      });
     } else {
       var jsdomOptions = {
         url: url,
@@ -35,7 +41,7 @@ var jsdomBrowser = function (baseBrowserDecorator, config) {
           ProcessExternalResources: ["script"]
         },
         created: function (error, window) {
-          // Do nothing.
+          self.window = window;
         }
       }
 
@@ -47,9 +53,8 @@ var jsdomBrowser = function (baseBrowserDecorator, config) {
     }
   };
 
-  var self = this;
-
   this.on("kill", function (done) {
+    self.window && self.window.close();
     self.emit("done");
     process.nextTick(done);
   });
