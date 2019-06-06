@@ -29,7 +29,7 @@ if (console.clear) {
 }
 
 afterEach((done) => {
-  setTimeout(done, jsdomMajorVersion >= 12 && jsdomMajorVersion <= 14 ? 2000 : 0);
+  setTimeout(done, jsdomMajorVersion >= 12 && jsdomMajorVersion <= 15 ? 2000 : 0);
 });
 
 function generateRandomFilePath () {
