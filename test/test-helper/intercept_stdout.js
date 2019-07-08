@@ -9,11 +9,12 @@ async function interceptStdout (options, fn) {
     return '';
   });
 
-  let result = await fn();
 
-  unhook();
-
-  return result;
+  try {
+    return await fn();
+  } finally {
+    unhook();
+  }
 }
 
 module.exports = { interceptStdout };
