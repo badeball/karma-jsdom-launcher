@@ -8,8 +8,6 @@ let { join } = require("path");
 
 let { randomBytes } = require("crypto");
 
-let { exec, spawn } = require("./child_process");
-
 let { interceptStdout } = require("./intercept_stdout");
 
 let { Server } = require("karma");

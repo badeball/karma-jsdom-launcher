@@ -1,4 +1,4 @@
-let { createKarmaTest, waitToExit, WriteableBuffer, jsdomMajorVersion } = require("./test-helper");
+let { createKarmaTest, jsdomMajorVersion } = require("./test-helper");
 
 let { ResourceLoader } = require("jsdom");
 

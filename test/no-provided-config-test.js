@@ -1,4 +1,4 @@
-let { createKarmaTest, waitToExit } = require("./test-helper");
+let { createKarmaTest } = require("./test-helper");
 
 describe("with jsdomLauncher: null", function () {
   it("should exit well", async () => {

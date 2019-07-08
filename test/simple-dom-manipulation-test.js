@@ -1,4 +1,4 @@
-let { createKarmaTest, waitToExit } = require("./test-helper");
+let { createKarmaTest } = require("./test-helper");
 
 it("should allow simple DOM manipulations", async () => {
   await createKarmaTest({}, () => {
