@@ -21,9 +21,14 @@ var jsdomBrowser = function (baseBrowserDecorator, config) {
     self.window = null;
 
     if (jsdom.JSDOM) { // Indicate jsdom >= 10.0.0 and a new API
+      var virtualConsole = new jsdom.VirtualConsole();
+      virtualConsole.sendTo(console);
+      virtualConsole.removeAllListeners("clear");
+
       var jsdomOptions = {
         resources: "usable",
-        runScripts: "dangerously"
+        runScripts: "dangerously",
+        virtualConsole: virtualConsole
       };
 
       if (config && config.jsdom) {
