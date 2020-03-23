@@ -15,7 +15,7 @@ let { Server } = require("karma");
 let { jsdomMajorVersion } = require("./jsdom-version");
 
 afterEach((done) => {
-  setTimeout(done, jsdomMajorVersion >= 12 && jsdomMajorVersion <= 15 ? 2000 : 0);
+  setTimeout(done, jsdomMajorVersion >= 12 && jsdomMajorVersion <= 16 ? 2000 : 0);
 });
 
 function generateRandomFilePath () {
