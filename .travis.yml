@@ -59,5 +59,5 @@ env:
   - JSDOM_VERSION=16 KARMA_VERSION=5
 script:
   - npm install jsdom@$JSDOM_VERSION karma@$KARMA_VERSION
-  - ln -s ../ node_modules/karma-jsom-launcher
+  - "[ -e node_modules/karma-jsom-launcher ] || ln -s ../ node_modules/karma-jsom-launcher"
   - npm test
