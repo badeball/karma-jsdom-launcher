@@ -18,7 +18,7 @@
     "test": "mocha --timeout 10000 --slow 5000"
   },
   "peerDependencies": {
-    "jsdom": ">=12 <=19",
+    "jsdom": ">=13 <=20",
     "karma": ">=2 <=6"
   },
   "license": "MIT",
