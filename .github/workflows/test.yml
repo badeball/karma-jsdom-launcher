@@ -1,0 +1,35 @@
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        karma: [2, 3, 4, 5, 6]
+        jsdom: [15, 16, 17, 18, 19, 20, 21, 22]
+    name: Karma v${{ matrix.karma }} & jsdom v${{ matrix.jsdom }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+      - name: Cache NPM modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('package.json') }}-${{ matrix.karma }}-${{ matrix.jsdom }}
+          restore-keys:
+            ${{ runner.os }}-npm-${{ hashFiles('package.json') }}
+            ${{ runner.os }}-npm-
+      - name: Dependencies
+        run: npm install
+      - name: Peer dependencies
+        run: npm install --no-save jsdom@${{ matrix.jsdom }} karma@${{ matrix.karma }}
+      - name: Link
+        run: "[ -e node_modules/karma-jsom-launcher ] || ln -s ../ node_modules/karma-jsom-launcher"
+      - name: Test
+        run: npm test
