@@ -4,10 +4,10 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        karma: [2, 3, 4, 5, 6]
+        karma: [3, 4, 5, 6]
         jsdom: [19, 20, 21, 22, 23, 24, 25, 26]
     name: Karma v${{ matrix.karma }} & jsdom v${{ matrix.jsdom }}
     steps:
