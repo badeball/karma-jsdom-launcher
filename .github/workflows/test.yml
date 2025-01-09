@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         karma: [2, 3, 4, 5, 6]
-        jsdom: [17, 18, 19, 20, 21, 22, 23, 24]
+        jsdom: [19, 20, 21, 22, 23, 24, 25, 26]
     name: Karma v${{ matrix.karma }} & jsdom v${{ matrix.jsdom }}
     steps:
       - name: Checkout
