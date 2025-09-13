@@ -1,6 +1,6 @@
 {
   "name": "karma-jsdom-launcher",
-  "version": "18.0.0",
+  "version": "19.0.0",
   "description": "A Karma plugin. Launcher for jsdom.",
   "main": "index.js",
   "author": "Jonas Amundsen <jonasba@gmail.com>",
