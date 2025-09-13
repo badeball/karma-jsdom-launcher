@@ -20,48 +20,29 @@ var jsdomBrowser = function (baseBrowserDecorator, config) {
   this._start = function (url) {
     self.window = null;
 
-    if (jsdom.JSDOM) { // Indicate jsdom >= 10.0.0 and a new API
-      var virtualConsole = new jsdom.VirtualConsole();
+    var virtualConsole = new jsdom.VirtualConsole();
 
-      if (virtualConsole.sendTo) {
-        virtualConsole.sendTo(console);
-      } else {
-        virtualConsole.forwardTo(console);
-      }
-
-      virtualConsole.removeAllListeners("clear");
-
-      var jsdomOptions = {
-        resources: "usable",
-        runScripts: "dangerously",
-        virtualConsole: virtualConsole
-      };
-
-      if (config && config.jsdom) {
-        jsdomOptions = assign(jsdomOptions, config.jsdom);
-      }
-
-      jsdom.JSDOM.fromURL(url, jsdomOptions).then(function (dom) {
-        self.window = dom.window;
-      });
+    if (virtualConsole.sendTo) {
+      virtualConsole.sendTo(console);
     } else {
-      var jsdomOptions = {
-        url: url,
-        features : {
-          FetchExternalResources: ["script", "iframe"],
-          ProcessExternalResources: ["script"]
-        },
-        created: function (error, window) {
-          self.window = window;
-        }
-      }
-
-      if (config && config.jsdom) {
-        jsdomOptions = assign(jsdomOptions, config.jsdom);
-      }
-
-      jsdom.env(jsdomOptions);
+      virtualConsole.forwardTo(console);
     }
+
+    virtualConsole.removeAllListeners("clear");
+
+    var jsdomOptions = {
+      resources: "usable",
+      runScripts: "dangerously",
+      virtualConsole: virtualConsole
+    };
+
+    if (config && config.jsdom) {
+      jsdomOptions = assign(jsdomOptions, config.jsdom);
+    }
+
+    jsdom.JSDOM.fromURL(url, jsdomOptions).then(function (dom) {
+      self.window = dom.window;
+    });
   };
 
   this.on("kill", function (done) {
