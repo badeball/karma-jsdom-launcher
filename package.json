@@ -14,11 +14,11 @@
     "jsdom"
   ],
   "scripts": {
-    "clean-install": "rm -rf node_modules/ && npm install && npm install --no-save karma@4 jsdom@13 && ln -s ../ node_modules/karma-jsdom-launcher",
+    "clean-install": "rm -rf node_modules/ && npm install && npm install --no-save karma@4 jsdom@27 && ln -s ../ node_modules/karma-jsdom-launcher",
     "test": "mocha --timeout 10000 --slow 5000"
   },
   "peerDependencies": {
-    "jsdom": ">=19 <=26",
+    "jsdom": ">=20 <=27",
     "karma": ">=3 <=6"
   },
   "license": "MIT",
