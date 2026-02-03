@@ -44,9 +44,9 @@ module.exports = function(config) {
 
     jsdomLauncher: {
       jsdom: {
-        resources: new jsdom.ResourceLoader({
+        resources: {
           userAgent: "foobar",
-        })
+        }
       }
     }
   });

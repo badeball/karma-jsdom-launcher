@@ -6,8 +6,10 @@ describe("with jsdom: { … }", function () {
   it("should pass options to jsdom", async function () {
     let jsdomOptions = {};
 
-    if (jsdomMajorVersion < 12) {
-      jsdomOptions.userAgent = "foobar";
+    if (jsdomMajorVersion > 27) {
+      jsdomOptions.resources = {
+        userAgent: "foobar",
+      };
     } else {
       jsdomOptions.resources = new ResourceLoader({
         userAgent: "foobar",
